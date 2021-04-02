@@ -1,0 +1,19 @@
+<template>
+  
+
+  <div tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" click.delegate="dialogController.close('NO')" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">${model.title}</h4>
+            </div>
+            <div class="modal-body">
+               ${model.message}?
+            </div>
+            <div class="modal-footer text-left">
+                <button type="button" class="btn btn-default" click.delegate="ok()">Yes</button>
+            </div>
+        </div> 
+    </div> 
+</template>

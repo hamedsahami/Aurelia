@@ -1,0 +1,10 @@
+{
+  "apptitle": "DE_Hahn Demo Application",
+  "scsore": "DE_Sscore",
+  "assetName": "DE_Asset Name",
+  "Department": "DE_Department",
+  "CountryofDepartment": "DE_Country of Department",
+  "EMailAdressOfDepartment": "DE_EMail Adress Of Department",
+  "PurchaseDate": "DE_Purchase Date",
+  "broken": "DE_Broken"
+}

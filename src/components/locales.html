@@ -1,0 +1,11 @@
+<template>
+ 
+  
+    <span repeat.for="locale of locales"
+    css="text-decoration: ${locale.code === currentLocale ? 'underline' : 'none'}"
+    click.trigger="setLocale(locale)">
+    <a class="nav-link" href="#"> ${locale.title}</a>
+     
+</span>
+ 
+</template>

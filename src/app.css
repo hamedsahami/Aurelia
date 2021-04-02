@@ -1,0 +1,10 @@
+.container{
+  /* margin-top: 2rem; */
+  /* background-color: aquamarine; */
+}
+
+.has-error input{ 
+border-color: red !important;
+}
+
+.mg-bot-5{margin-bottom: 5px;}
