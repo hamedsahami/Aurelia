@@ -3,6 +3,7 @@ import { PLATFORM } from 'aurelia-pal';
 import { I18N } from 'aurelia-i18n';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
+
 @autoinject
 export class app {
   public message = '';
@@ -29,7 +30,7 @@ export class app {
    
     config.title = 'Hahn Technical Task';
     config.map([
-      { route: 'confirm', name: 'confirm', moduleId: PLATFORM.moduleName('./components/confirm'), nav: false, title: 'Confirm'  },
+      { route: 'confirm', name: 'confirm', moduleId: PLATFORM.moduleName('./components/confirm'), nav: true, title: 'Confirm'  },
       { route: ['', 'asset'], name: 'asset', moduleId: './components/asset', nav: true, title: 'Asset'  },
     ]);
     this.router = router;
