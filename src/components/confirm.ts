@@ -2,6 +2,6 @@ export class confirm {
   message: string;
 
   constructor() {
-    this.message = 'Hello world';
+    this.message = 'Server confirms the sending... ;)';
   }
 }

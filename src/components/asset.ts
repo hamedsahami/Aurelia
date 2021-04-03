@@ -11,7 +11,7 @@ import { prompt } from './propmt';
 import { Redirect, Router } from 'aurelia-router';
 import { stringify } from 'node:querystring';
 import { computedFrom, bindable } from 'aurelia-framework';
-import { HttpClient } from 'aurelia-fetch-client';
+import { HttpClient, json } from 'aurelia-fetch-client';
 
 @inject(
   NewInstance.of(ValidationController)
@@ -19,7 +19,7 @@ import { HttpClient } from 'aurelia-fetch-client';
   , NewInstance.of(EventAggregator)
   , NewInstance.of(DialogService)
   , NewInstance.of(ValidationRules)
-  , NewInstance.of(Router)
+  , (Router)
 )
 export class asset {
   [x: string]: any;
@@ -50,7 +50,7 @@ export class asset {
       .then()
       .withMessage("Country is not valid")
       .ensure('Department').required()
-      .ensure('PurchaseDate').required().satisfies((val, o: AssetViewModel ) => {
+      .ensure('PurchaseDate').required().satisfies((val, o: AssetViewModel) => {
 
         const sourceDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
         const result = new Date(o.PurchaseDate) > sourceDate;
@@ -60,16 +60,16 @@ export class asset {
       .withMessage("PurchaseDate is not valid and is older one year old")
       .ensure('EMailAdressOfDepartment').required().satisfies((val, o: AssetViewModel) => {
 
-        const regex =  /.+@.+/g;
-        let result=false;
-        if(o.EMailAdressOfDepartment.match(regex)){
-          result=true;
+        const regex = /.+@.+/g;
+        let result = false;
+        if (o.EMailAdressOfDepartment.match(regex)) {
+          result = true;
         }
         return result;
       })
-      .then() .withMessage("Email is not match by valid topleveldomain rules")
+      .then().withMessage("Email is not match by valid topleveldomain rules")
       .on(this._Model);
-      //*@*.
+    //*@*.
   }
   attached() {
     this.i18n.updateTranslations(this.element);
@@ -77,14 +77,26 @@ export class asset {
 
   initCountries() {
     const httpClient = new HttpClient();
+    httpClient.configure(config => {
+      config
+        .useStandardConfiguration()
+        .withBaseUrl('api/')
+        .withDefaults({
+          credentials: 'same-origin',
+        })
+        .withInterceptor({
+          request(request) {
+            return request;
+          }
+        });
+    });
     httpClient.fetch('https://restcountries.eu/rest/v2/').then(response =>
       response.json()
     )
       .then(data => {
         data.forEach(element => {
           this.countries.push(element.name);
-        });
-        console.info(this.countries);
+        });      
 
       }).catch(error => {
         console.error(error);
@@ -103,15 +115,16 @@ export class asset {
 
     httpClient.fetch('http://localhost:5000/Asset', {
       method: 'post',
-      body: this._Model
+      body: json( this._Model)
     })
       .then(response =>
         response.json()
       )
       .then(data => {
         console.log(data);
+        this.router.navigateToRoute('confirm');
       }).catch(error => {
-        this.dialogService.open({ viewModel: prompt, model: { "title": "Error", "message": error }, lock: false });
+        this.dialogService.open({ viewModel: prompt, model: { "title": "Error", "message": error, action: this.infoPrompt,mainComponent: this }, lock: false });
         console.error(error);
       });
 
@@ -124,8 +137,13 @@ export class asset {
   resetConfirmAction(args: any): void {
     console.info('OK button pressed', args);
     if (args === 'OK') {
-      this.mainComponent._Model = {};
+      this.mainComponent._Model =  { "Department": "2" };
     }
+  }
+
+
+  infoPrompt(args: any): void {
+    console.info('OK button pressed', args);
   }
 
   reset() {

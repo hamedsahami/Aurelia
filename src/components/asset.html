@@ -1,39 +1,6 @@
-<template >
-  <div class="row mg-bot-5"></div>
-  <p>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
-      Front-End Specs
-    </button>
-  </p>
-  <div class="collapse" id="collapseExample">
-    <div class="card card-body">
-      <div class="jumbotron">
-        <h1 class="display-4">${message}</h1>
-        <p class="lead">Just simple aurelia form with some requested properties.</p>
-        <hr class="my-4">
-        <ul>
-          <li> Form can only be send if the data is valid</li>
-            <li> Use Boostrap for the UI</li>
-            <li> Use aurelia-validation, validate as much as you can :-)</li>
-            <li> Use a Bootstrap Form Renderer</li>
-            <li> invalid fields must be marked with an red border and an explanation why the date is invalid</li>
-            <li> all strings must be using i18next</li>
-            <li> the form has to buttons- send and reset.</li>
-            <li> clicking the reset button an aurelia-dialog is shown - which ask if the user is really sure to reset all the data</li>
-            <li> the reset button is only enabled if the user has typed in data -> if all fields are empty the reset button is not enabled.</li>
-            <li> when the user has touched a field but afterwards deleted all entries, the reset button is also not enabled.</li>
-            <li> The send button is only active if all required fields are filled out and are valid.</li>
-            <li> after sending the data, the aurelia router redirects to a view which confirms the sending.</li>
-            <li> if the sending was not successful an error message is shown in a aurelia-dialog. Describing what was going wrong.</li>
-        </ul>   
-      </div>
-    </div>
-  </div>
-
- 
+<template > 
   <form submit.delegate="submit()" with.bind="form"   >
-    <ul><li repeat.for="error of controller.errors">${error.message}</li></ul>
-     
+    <ul><li repeat.for="error of controller.errors">${error.message}</li></ul>     
     <div class="form-group">
       <label class="control-label" for="assetName" t="assetName">Asset Name</label>
       <input type="text" class="form-control" id="assetName" placeholder="Asset Name"
@@ -48,8 +15,7 @@
         <option value="2">Store2</option>
         <option value="3">Store3</option>
         <option value="4">MaintenanceStation</option>
-      </select>
- 
+      </select> 
     </div>
     <div class="form-group">
       <label class="control-label" for="CountryofDepartment" t="CountryofDepartment">Country of Department</label>

@@ -29,7 +29,7 @@ export class app {
    
     config.title = 'Hahn Technical Task';
     config.map([
-      { route: 'confirm', name: 'confirm', moduleId: PLATFORM.moduleName('./components/confirm'), nav: true, title: 'Confirm'  },
+      { route: 'confirm', name: 'confirm', moduleId: PLATFORM.moduleName('./components/confirm'), nav: false, title: 'Confirm'  },
       { route: ['', 'asset'], name: 'asset', moduleId: './components/asset', nav: true, title: 'Asset'  },
     ]);
     this.router = router;
